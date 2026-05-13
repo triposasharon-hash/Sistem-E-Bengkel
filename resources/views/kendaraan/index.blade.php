@@ -1,49 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem E-Bengkel</title>
+@extends('layouts.app')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+@section('content')
 
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                Sistem E-Bengkel
-            </a>
-        </div>
-    </nav>
+<h2>Daftar Servis Kendaraan</h2>
 
-    <div class="container mt-4">
+<a href="/kendaraan/create" class="btn btn-primary mb-3">
+    Tambah Kendaraan
+</a>
 
-        <h2>Daftar Servis Kendaraan</h2>
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 
-        <table class="table table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>No</th>
-                    <th>Plat Nomor</th>
-                    <th>Nama Pemilik</th>
-                    <th>Merk Kendaraan</th>
-                    <th>Keluhan</th>
-                </tr>
-            </thead>
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>No</th>
+            <th>Plat Nomor</th>
+            <th>Nama Pemilik</th>
+            <th>Merk Kendaraan</th>
+            <th>Keluhan</th>
+        </tr>
+    </thead>
 
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>B 1234 ABC</td>
-                    <td>Andi</td>
-                    <td>Honda</td>
-                    <td>Ganti Oli</td>
-                </tr>
-            </tbody>
-        </table>
+    <tbody>
+        @foreach($kendaraans as $index => $kendaraan)
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $kendaraan->plat_nomor }}</td>
+            <td>{{ $kendaraan->nama_pemilik }}</td>
+            <td>{{ $kendaraan->merk_kendaraan }}</td>
+            <td>{{ $kendaraan->keluhan }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
-    </div>
-
-</body>
-</html>
+@endsection

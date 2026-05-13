@@ -7,20 +7,21 @@ use App\Models\Kendaraan;
 
 class KendaraanController extends Controller
 {
-    // TAMPIL DATA (READ)
+    // READ DATA
     public function index()
     {
         $kendaraans = Kendaraan::all();
+
         return view('kendaraan.index', compact('kendaraans'));
     }
 
-    // TAMPIL FORM CREATE
+    // FORM TAMBAH DATA
     public function create()
     {
         return view('kendaraan.create');
     }
 
-    // SIMPAN DATA (CREATE)
+    // SIMPAN DATA
     public function store(Request $request)
     {
         $request->validate([
@@ -32,6 +33,7 @@ class KendaraanController extends Controller
 
         Kendaraan::create($request->all());
 
-        return redirect('/kendaraan')->with('success', 'Data berhasil ditambahkan');
+        return redirect('/kendaraan')
+            ->with('success', 'Data berhasil ditambahkan');
     }
 }
